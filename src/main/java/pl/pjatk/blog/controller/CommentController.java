@@ -1,9 +1,7 @@
 package pl.pjatk.blog.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import pl.pjatk.blog.model.Comment;
 import pl.pjatk.blog.model.Post;
 import pl.pjatk.blog.service.CommentService;
@@ -11,6 +9,8 @@ import pl.pjatk.blog.service.PostService;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/comment")
 public class CommentController {
     private CommentService commentService;
 

@@ -2,6 +2,7 @@ package pl.pjatk.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,10 +21,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPost;
 
-//    @Column(name = "author_post")
-
     @ManyToOne
-//    @JsonIgnore
     @JoinColumn(name = "id_author")
     private Author authorPost;
     private String bodyPost;
@@ -32,16 +30,17 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timePost;
 
-//    private List<Comment> commentsList;
-//
+    @OneToMany(cascade= CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
+    private List<Comment> commentsList = new ArrayList<>();
+
     public Post() {
 
     }
 
-    public Post(String bodyPost, String categoryPost) {
+    public Post(String bodyPost, String categoryPost, List<Comment> commentsList) {
         this.bodyPost = bodyPost;
         this.categoryPost = categoryPost;
-//        this.commentsList = commentsList;
+        this.commentsList = commentsList;
     }
 
     public Long getIdPost() {
@@ -86,11 +85,12 @@ public class Post {
         this.timePost = timePost;
     }
 
-    //    public List<Comment> getCommentsList() {
-//        return commentsList;
-//    }
-//
-//    public void setCommentsList(List<Comment> commentsList) {
-//        this.commentsList = commentsList;
-//    }
+    @JsonManagedReference
+    public List<Comment> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(List<Comment> commentsList) {
+        this.commentsList = commentsList;
+    }
 }

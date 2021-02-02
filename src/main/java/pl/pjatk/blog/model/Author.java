@@ -16,8 +16,7 @@ public class Author {
     private String nameAuthor;
     private String emailAuthor;
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "authorPost", fetch = FetchType.LAZY)
-//    @JsonIgnore
-    private List<Post> postsList;
+    private List<Post> postsList = new ArrayList<>();
 
 
     public Author() {
