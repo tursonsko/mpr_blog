@@ -52,6 +52,7 @@ public class Post {
         this.idPost = idPost;
     }
 
+    @JsonBackReference
     public Author getAuthorPost() {
         return authorPost;
     }

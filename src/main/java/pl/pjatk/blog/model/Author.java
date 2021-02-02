@@ -56,7 +56,7 @@ public class Author {
         this.emailAuthor = emailAuthor;
     }
 
-//    @JsonManagedReference
+    @JsonManagedReference
     public List<Post> getPostsList() {
         return postsList;
     }
