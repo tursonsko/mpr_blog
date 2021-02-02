@@ -1,12 +1,15 @@
 package pl.pjatk.blog.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Comment {
+
     private Long idComment;
     private Author authorComment;
     private String bodyComment;
     private String categoryComment;
-    private LocalDateTime timeComment;
+    private Date timeComment;
     private Post post;
+
+
 }

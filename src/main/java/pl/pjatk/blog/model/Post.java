@@ -61,7 +61,7 @@ public class Post {
         this.authorPost = authorPost;
     }
 
-//    @JsonBackReference
+
     public String getBodyPost() {
         return bodyPost;
     }
