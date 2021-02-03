@@ -7,6 +7,7 @@ import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.service.AuthorService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/author")
@@ -21,6 +22,16 @@ public class AuthorController {
     @GetMapping
     public ResponseEntity<List<Author>> findAll() {
         return ResponseEntity.ok(authorService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Author>> findById(@PathVariable Long id) {
+        Optional<Author> byId = authorService.findById(id);
+        if(byId.isPresent()) {
+            return ResponseEntity.ok(byId);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping

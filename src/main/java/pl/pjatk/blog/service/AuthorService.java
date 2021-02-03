@@ -4,10 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.repository.AuthorRepository;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 @Service
 public class AuthorService {
@@ -20,6 +17,10 @@ public class AuthorService {
 
     public List<Author> findAll(){
         return authorRepository.findAll();
+    }
+
+    public Optional<Author> findById(Long id) {
+        return authorRepository.findById(id);
     }
 
     public Author save(Author author) {

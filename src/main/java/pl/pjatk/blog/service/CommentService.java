@@ -22,6 +22,8 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
+//    public Optional
+
     public Comment save(Comment comment) {
 
         Calendar c = Calendar.getInstance();
@@ -34,7 +36,11 @@ public class CommentService {
 
         if(count < 5) {
             return commentRepository.save(comment);
+        } else {
+            throw new RuntimeException("mozesz dodac max 5 komentarzy w ciagu minuty");
         }
-        return new Comment();
+//        return new Comment();
     }
+
+
 }
