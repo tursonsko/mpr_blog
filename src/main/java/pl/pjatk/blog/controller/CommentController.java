@@ -7,6 +7,7 @@ import pl.pjatk.blog.model.Post;
 import pl.pjatk.blog.service.CommentService;
 import pl.pjatk.blog.service.PostService;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController

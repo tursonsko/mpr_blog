@@ -27,12 +27,13 @@ public class Comment {
     private Post post;
 
     public Comment() {
-
+        this.timeComment = new Date();
     }
 
     public Comment(String authorComment, String bodyComment) {
         this.authorComment = authorComment;
         this.bodyComment = bodyComment;
+        this.timeComment = new Date();
     }
 
     public Long getIdComment() {
@@ -74,5 +75,9 @@ public class Comment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Date subtractMin() {
+        return new Date();
     }
 }
