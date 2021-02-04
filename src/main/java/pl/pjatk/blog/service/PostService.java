@@ -26,7 +26,6 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    //TODO findbyid
     public Optional<Post> findById(Long idPost) {
         return postRepository.findById(idPost);
     }
@@ -42,7 +41,7 @@ public class PostService {
             List<Post> listOfPost = postRepository.findByauthorPostAndCategoryPost(author.get(), categoryPost);
             return new AuthorWithCategory(author.get().getNameAuthor(), categoryPost, listOfPost.size());
         } else {
-            throw new NoSuchElementException(String.format("User with %s does not exist.", idAuthor));
+            throw new NoSuchElementException(String.format("Author with %s does not exist.", idAuthor));
         }
     }
 
