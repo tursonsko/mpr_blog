@@ -34,6 +34,10 @@ public class AuthorController {
         }
     }
 
+    //TODO delete
+
+    //TODO update
+
     @PostMapping
     public ResponseEntity<Author> save(@RequestBody Author author) {
         return ResponseEntity.ok(authorService.save(author));

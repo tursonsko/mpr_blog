@@ -24,6 +24,12 @@ public class CommentController {
         return ResponseEntity.ok(commentService.findAll());
     }
 
+    //TODO findbyid
+
+    //TODO delete
+
+    //TODO update
+
     @PostMapping
     public ResponseEntity<Comment> save(@RequestBody Comment comment) {
         return ResponseEntity.ok(commentService.save(comment));
