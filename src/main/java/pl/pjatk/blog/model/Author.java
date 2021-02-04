@@ -3,7 +3,9 @@ package pl.pjatk.blog.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuthor;
     private String nameAuthor;
+
+    @Pattern(regexp = "^[A-Z0-9._-]+@[A-Z0-9.-].[A-Z]{2,3}$")
     private String emailAuthor;
+
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "authorPost", fetch = FetchType.LAZY)
     private List<Post> postsList = new ArrayList<>();
 

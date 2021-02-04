@@ -3,6 +3,7 @@ package pl.pjatk.blog.advice;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -29,6 +30,12 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.TOO_MANY_REQUESTS)
     public ResponseEntity<Object> handleCountMaxCommentsException(CountMaxCommentsException exception) {
         return new ResponseEntity<>(exception.toString(), HttpStatus.TOO_MANY_REQUESTS);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> handleMethodArgumentNotValidException() {
+        return new ResponseEntity<>("Provided email address does not match with standards :)", HttpStatus.BAD_REQUEST);
     }
 
 }

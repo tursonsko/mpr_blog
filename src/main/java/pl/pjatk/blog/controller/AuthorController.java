@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.service.AuthorService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -40,7 +41,7 @@ public class AuthorController {
     //TODO update
 
     @PostMapping
-    public ResponseEntity<Author> save(@RequestBody Author author) {
+    public ResponseEntity<Author> save(@Valid @RequestBody Author author) {
         return ResponseEntity.ok(authorService.save(author));
     }
 }
