@@ -34,13 +34,12 @@ public class PostController {
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Post> save(@RequestBody Post post) {
-        return ResponseEntity.ok(postService.save(post));
+    @PostMapping("/{idAuthor}")
+    public ResponseEntity<Post> save(@RequestBody Post post, @PathVariable Long idAuthor) {
+        return ResponseEntity.ok(postService.save(post, idAuthor));
     }
 
 
-    //TODO delete
     @DeleteMapping("/{idPost}")
     public ResponseEntity<Void> delete(@PathVariable Long idPost) {
         postService.delete(idPost);
@@ -48,7 +47,6 @@ public class PostController {
     }
 
 
-    //TODO update
     @PutMapping("/{idPost}")
     public ResponseEntity<Post> update(@RequestBody Post post, @PathVariable Long idPost) {
         return ResponseEntity.ok(postService.update(idPost, post));

@@ -7,6 +7,7 @@ import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.service.AuthorService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -24,13 +25,13 @@ public class AuthorController {
         return ResponseEntity.ok(authorService.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<Author>> findById(@PathVariable Long id) {
-        Optional<Author> byId = authorService.findById(id);
-        if(byId.isPresent()) {
-            return ResponseEntity.ok(byId);
+    @GetMapping("/{idAuthor}")
+    public ResponseEntity<Optional<Author>> findById(@PathVariable Long idAuthor) {
+        Optional<Author> optionalAuthor = authorService.findById(idAuthor);
+        if(optionalAuthor.isPresent()) {
+            return ResponseEntity.ok(optionalAuthor);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NoSuchElementException(String.format("There is no Author with ID No. %s", idAuthor));
         }
     }
 

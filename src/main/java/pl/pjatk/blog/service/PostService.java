@@ -1,5 +1,6 @@
 package pl.pjatk.blog.service;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.model.AuthorWithCategory;
@@ -30,25 +31,29 @@ public class PostService {
         return postRepository.findById(idPost);
     }
 
-    public Post save(Post post) {
-        return postRepository.save(post);
+    public Post save(Post post, Long idAuthor) {
+        Optional<Author> author = authorRepository.findById(idAuthor);
+        if(author.isPresent()){
+            return postRepository.save(post);
+        } else {
+            throw new DataIntegrityViolationException(String.format("Cannot add post becasue there is no Author with Id No. %s", idAuthor));
+        }
     }
 
     public AuthorWithCategory getPostByAuthorPostAndCategoryPost(Long idAuthor, String categoryPost) {
         Optional<Author> author = authorRepository.findById(idAuthor);
-
         if (author.isPresent()) {
             List<Post> listOfPost = postRepository.findByauthorPostAndCategoryPost(author.get(), categoryPost);
             return new AuthorWithCategory(author.get().getNameAuthor(), categoryPost, listOfPost.size());
         } else {
-            throw new NoSuchElementException(String.format("Author with %s does not exist.", idAuthor));
+            throw new NoSuchElementException(String.format("Author with ID No. %s does not exist.", idAuthor));
         }
     }
 
     public void delete(Long idPost) {
         postRepository.deleteById(idPost);
     }
-
+//dorobic wyjatki zabezpieczyc update i delete tez
     public Post update(Long idPost, Post updatedPost) {
         updatedPost.setIdPost(idPost);
         if (findById(updatedPost.getIdPost()).isPresent()) {

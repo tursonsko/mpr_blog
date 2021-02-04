@@ -30,8 +30,9 @@ public class CommentController {
 
     //TODO update
 
-    @PostMapping
-    public ResponseEntity<Comment> save(@RequestBody Comment comment) {
-        return ResponseEntity.ok(commentService.save(comment));
+    @PostMapping("/{idPost}")
+    public ResponseEntity<Comment> save(@RequestBody Comment comment, @PathVariable Long idPost) {
+
+        return ResponseEntity.ok(commentService.save(comment, idPost));
     }
 }
