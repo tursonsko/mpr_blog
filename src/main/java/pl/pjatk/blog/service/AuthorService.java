@@ -39,17 +39,18 @@ public class AuthorService {
     public Author save(Author author) throws Exception {
         List<Author> authorList = authorRepository.findAll();
         for (Author author1 : authorList) {
-            if ((author1.getEmailAuthor().equals(author.getEmailAuthor()))) {
+            if (!((author1.getEmailAuthor().equals(author.getEmailAuthor())))) {
                 //todo obsluzyc to bo jest ZLE , sa 2 wyjatki z jednej metody i nie rzuca emailaEXists
+                throw new Exception("istnieje juz taki email w bazie");
+            } else {
                 return authorRepository.save(author);
             }
         }
-        throw new Exception("istnieje juz taki email w bazie");
-
+    }
         //todo sprawdzic MethodArgumentNotValidException bo cos sie zagubilem, trzeba to rozwiazac jakos
         //"todo cd." zeby smigalyob wyjatki w postmanie a nie rzuca 500
         //TODO POPATRZEC NA SAVE Z COMMENT_SERVICE I TAK TO ROZWIAZAC ZEBY CHODZILY OBA EXCEPTIONS
         //TODO CountMaxCommentsException to jest custom i chyba trzeba zrobic oba customy na emaile
         //todo na dwoch ifach mysle ze beda dzialac
-    }
+
 }
