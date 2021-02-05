@@ -39,9 +39,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("Provided email address does not match with standards :)", HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler(EmailExistsException.class)
-//    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
-//    public ResponseEntity<Object> handleEmailExistsException() {
-//        return new ResponseEntity<>("Provided email already exists in DataBase!", HttpStatus.NOT_ACCEPTABLE);
-//    }
+    @ExceptionHandler(EmailExistsException.class)
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+    public ResponseEntity<Object> handleEmailExistsException(EmailExistsException exception) {
+        return new ResponseEntity<>(exception.toString(), HttpStatus.NOT_ACCEPTABLE);
+    }
 }
