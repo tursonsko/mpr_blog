@@ -22,8 +22,6 @@ public class AuthorService {
         if (authorList.size() > 0) {
             return authorRepository.findAll();
         } else {
-
-            //todo to poprawic!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             throw new NoSuchElementException(String.format("Cannot find if there is no Author :("));
         }
     }

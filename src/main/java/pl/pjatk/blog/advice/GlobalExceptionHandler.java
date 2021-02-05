@@ -17,16 +17,18 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ResponseEntity<Object> handleElementException(NoSuchElementException exception){
+    public ResponseEntity<Object> handleElementException(NoSuchElementException exception) {
         return new ResponseEntity<>(exception.toString(), HttpStatus.BAD_REQUEST);
     }
-//
+
+    //
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
         return new ResponseEntity<>(exception.toString(), HttpStatus.CONFLICT);
     }
-//custom
+
+    //custom
     @ExceptionHandler(CountMaxCommentsException.class)
     @ResponseStatus(value = HttpStatus.TOO_MANY_REQUESTS)
     public ResponseEntity<Object> handleCountMaxCommentsException(CountMaxCommentsException exception) {
