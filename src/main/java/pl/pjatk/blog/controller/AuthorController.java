@@ -39,7 +39,7 @@ public class AuthorController {
 
 
     @PostMapping
-    public ResponseEntity<Author> save(@Valid @RequestBody Author author) throws Exception {
-        return ResponseEntity.ok(authorService.save(author));
+    public ResponseEntity<Author> save(@Valid @RequestBody Author newAuthor) throws Exception {
+        return ResponseEntity.ok(authorService.save(newAuthor));
     }
 }

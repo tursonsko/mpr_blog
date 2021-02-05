@@ -31,13 +31,13 @@ public class AuthorService {
         return authorRepository.findById(idAuthor);
     }
 
-    public Author save(Author author) throws Exception {
+    public Author save(Author newAuthor) throws Exception {
         List<Author> authorList = authorRepository.findAll();
-        for (Author author1 : authorList) {
-            if ((author1.getEmailAuthor().equals(author.getEmailAuthor()))) {
+        for (Author providedAuthor : authorList) {
+            if ((providedAuthor.getEmailAuthor().equals(newAuthor.getEmailAuthor()))) {
                 throw new EmailExistsException("Provided email already exists in DataBase!");
             }
         }
-        return authorRepository.save(author);
+        return authorRepository.save(newAuthor);
     }
 }
