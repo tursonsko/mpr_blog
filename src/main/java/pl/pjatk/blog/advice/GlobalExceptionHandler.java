@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import pl.pjatk.blog.customExceptions.EmailExistsException;
 import pl.pjatk.blog.customExceptions.CountMaxCommentsException;
+import pl.pjatk.blog.model.ErrorModel;
 
+import java.time.Instant;
 import java.util.NoSuchElementException;
 
 @ControllerAdvice
@@ -38,13 +40,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleMethodArgumentNotValidException() {
-        return new ResponseEntity<>("Provided email address does not match with standards :)", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorModel(HttpStatus.BAD_REQUEST.value(),"Provided email address does not match with standards :)", Instant.now()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(EmailExistsException.class)
     @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
     public ResponseEntity<Object> handleEmailExistsException(EmailExistsException exception) {
-        return new ResponseEntity<>(exception.toString(), HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>(new ErrorModel(HttpStatus.NOT_ACCEPTABLE.value(), exception.toString(), Instant.now()), HttpStatus.NOT_ACCEPTABLE);
     }
 
     //    NumberFormatException

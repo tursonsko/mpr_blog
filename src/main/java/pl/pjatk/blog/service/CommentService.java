@@ -21,17 +21,15 @@ public class CommentService {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
     }
-    //todo sprawdzic
+
     public List<Comment> findAllComments() {
         return commentRepository.findAll();
     }
 
-    //todo sprawdzic
     public Optional<Comment> findCommentById(Long idComment) {
         return commentRepository.findById(idComment);
     }
 
-    //todo sprawdzic
     public void deleteSingleCommentById(Long idComment) {
         Optional<Comment> optionalComment = commentRepository.findById(idComment);
         if (optionalComment.isEmpty()) {
@@ -41,7 +39,6 @@ public class CommentService {
         }
     }
 
-    //TODO sprawdzic
     public Comment updateBodyComment(Long idComment, Comment updatedComment) {
         Optional<Comment> optionalComment = commentRepository.findById(idComment);
         if (optionalComment.isPresent()) {
@@ -51,7 +48,6 @@ public class CommentService {
             commentRepository.save(optionalComment.get());
             return optionalComment.get();
         } else {
-            //todo zmienic to sprawdzic chyba spoko jest!!!!!!!!!!!!!!!!!!!!!!!!
             throw new NoSuchElementException(String.format("There is no Comment with ID No.%s", idComment));
         }
     }
@@ -62,11 +58,13 @@ public class CommentService {
         if (optionalPost.isEmpty()) {
             throw new DataIntegrityViolationException(String.format("Cannot add comment becasue there is no Post with Id No. %s", idPost));
         } else {
+
             Calendar c = Calendar.getInstance();
             c.setTime(comment.getTimeComment());
             c.add(Calendar.SECOND, -15);/*zmienic na minute*/
 
             Date currentDateMinusOne = c.getTime();
+
             Long count = commentRepository.getCommentsYoungerThanOneMinute(currentDateMinusOne);
 
             if (count < 5) {
