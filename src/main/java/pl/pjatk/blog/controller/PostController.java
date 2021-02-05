@@ -27,7 +27,7 @@ public class PostController {
     @GetMapping("/{idPost}")
     public ResponseEntity<Optional<Post>> findById(@PathVariable Long idPost) {
         Optional<Post> byIdPost = postService.findById(idPost);
-        if(byIdPost.isPresent()) {
+        if (byIdPost.isPresent()) {
             return ResponseEntity.ok(byIdPost);
         } else {
             return ResponseEntity.notFound().build();
@@ -39,19 +39,16 @@ public class PostController {
         return ResponseEntity.ok(postService.save(post, idAuthor));
     }
 
-
     @DeleteMapping("/{idPost}")
     public ResponseEntity<Void> delete(@PathVariable Long idPost) {
         postService.delete(idPost);
         return ResponseEntity.ok().build();
     }
 
-
     @PutMapping("/{idPost}")
     public ResponseEntity<Post> update(@RequestBody Post post, @PathVariable Long idPost) {
         return ResponseEntity.ok(postService.update(idPost, post));
     }
-
 
     @GetMapping("/{idAuthor}/{categoryPost}")
     public ResponseEntity<AuthorWithCategory> findPostByAuthorAndCategory(@PathVariable Long idAuthor, @PathVariable String categoryPost) {
@@ -59,5 +56,8 @@ public class PostController {
         return ResponseEntity.ok(listOfPosts);
     }
 
+    @GetMapping("/filter/{pattern}")
+    public ResponseEntity<List<Post>> phraseFromBodyPost(@PathVariable String pattern) {
+        return ResponseEntity.ok(postService.findSpecificPost(pattern));
+    }
 }
-

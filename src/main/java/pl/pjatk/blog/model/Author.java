@@ -17,7 +17,7 @@ public class Author {
     private Long idAuthor;
     private String nameAuthor;
 
-    @Pattern(regexp = "^[A-Z0-9._-]+@[A-Z0-9.-].[A-Z]{2,3}$")
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")
     private String emailAuthor;
 
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "authorPost", fetch = FetchType.LAZY)

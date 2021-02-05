@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import pl.pjatk.blog.customExceptions.EmailExistsException;
 import pl.pjatk.blog.customExceptions.CountMaxCommentsException;
 
 import java.util.NoSuchElementException;
@@ -38,4 +39,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>("Provided email address does not match with standards :)", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(EmailExistsException.class)
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+    public ResponseEntity<Object> handleAuthorExistsException() {
+        return new ResponseEntity<>("Provided email already exists in DataBase!", HttpStatus.NOT_ACCEPTABLE);
+    }
 }

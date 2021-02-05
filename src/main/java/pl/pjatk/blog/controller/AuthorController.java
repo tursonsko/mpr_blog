@@ -2,6 +2,7 @@ package pl.pjatk.blog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.service.AuthorService;
@@ -36,12 +37,9 @@ public class AuthorController {
         }
     }
 
-    //TODO delete
-
-    //TODO update
 
     @PostMapping
-    public ResponseEntity<Author> save(@Valid @RequestBody Author author) {
+    public ResponseEntity<Author> save(@Valid @RequestBody Author author) throws Exception {
         return ResponseEntity.ok(authorService.save(author));
     }
 }

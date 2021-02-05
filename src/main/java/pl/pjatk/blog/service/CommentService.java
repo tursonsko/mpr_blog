@@ -24,12 +24,18 @@ public class CommentService {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
     }
-
+    //todo usprawnic
     public List<Comment> findAll(){
         return commentRepository.findAll();
     }
 
-    public Comment save(Comment comment, Long idPost) {
+    //TODO findbyid
+
+    //TODO delete
+
+    //TODO update
+
+    public Comment save(Comment comment, Long idPost) throws CountMaxCommentsException {
         Optional<Post> optionalPost = postRepository.findById(idPost);
         if (optionalPost.isEmpty()) {
             throw new DataIntegrityViolationException(String.format("Cannot add comment becasue there is no Post with Id No. %s", idPost));

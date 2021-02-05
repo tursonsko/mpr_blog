@@ -11,4 +11,7 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findByauthorPostAndCategoryPost(Author authorPost, String categoryPost);
+
+//    @Query("Select p from Post p where Post.bodyPost like 'Adam'")
+
 }
