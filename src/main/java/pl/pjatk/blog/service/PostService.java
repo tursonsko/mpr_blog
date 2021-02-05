@@ -24,16 +24,20 @@ public class PostService {
         this.authorRepository = authorRepository;
     }
 
-    public List<Post> findAll() {
-        //todo taka samo jak w autorze
-        return postRepository.findAll();
+    public List<Post> findAllPosts() {
+        List<Post> postList = postRepository.findAll();
+        if (postList.size() > 0) {
+            return postRepository.findAll();
+        } else {
+            throw new NoSuchElementException(String.format("Cannot find if there is no Post in DataBase :("));
+        }
     }
 
-    public Optional<Post> findById(Long idPost) {
+    public Optional<Post> findPostById(Long idPost) {
         return postRepository.findById(idPost);
     }
 
-    public Post save(Post post, Long idAuthor) {
+    public Post saveSinglePost(Post post, Long idAuthor) {
         Optional<Author> author = authorRepository.findById(idAuthor);
         if (author.isPresent()) {
             return postRepository.save(post);
@@ -42,17 +46,7 @@ public class PostService {
         }
     }
 
-    public AuthorWithCategory getPostByAuthorPostAndCategoryPost(Long idAuthor, String categoryPost) {
-        Optional<Author> optionalAuthor = authorRepository.findById(idAuthor);
-        if (optionalAuthor.isPresent()) {
-            List<Post> listOfPost = postRepository.findByauthorPostAndCategoryPost(optionalAuthor.get(), categoryPost);
-            return new AuthorWithCategory(optionalAuthor.get().getNameAuthor(), categoryPost, listOfPost.size());
-        } else {
-            throw new NoSuchElementException(String.format("Author with ID No.%s does not exist.", idAuthor));
-        }
-    }
-
-    public void delete(Long idPost) {
+    public void deleteSinglePostById(Long idPost) {
         Optional<Post> optionalPost = postRepository.findById(idPost);
         if (optionalPost.isEmpty()) {
             throw new NoSuchElementException(String.format("There is no post with ID No.%s", idPost));
@@ -60,8 +54,18 @@ public class PostService {
             postRepository.deleteById(idPost);
         }
     }
+//    NumberFormatException tu dziala
+    public AuthorWithCategory getPostByAuthorPostAndCategoryPost(Long idAuthor, String categoryPost) {
+        Optional<Author> optionalAuthor = authorRepository.findById(idAuthor);
+        if (optionalAuthor.isPresent()) {
+            List<Post> listOfPost = postRepository.findByAuthorPostAndCategoryPost(optionalAuthor.get(), categoryPost);
+            return new AuthorWithCategory(optionalAuthor.get().getNameAuthor(), categoryPost, listOfPost.size());
+        } else {
+            throw new NoSuchElementException(String.format("Author with ID No.%s does not exist.", idAuthor));
+        }
+    }
 
-    public Post update(Long idPost, Post updatedPost) {
+    public Post updateBodyPost(Long idPost, Post updatedPost) {
         Optional<Post> post = postRepository.findById(idPost);
         if (post.isPresent()) {
             if (!(post.get().getBodyPost().equals(updatedPost.getBodyPost()))) {
@@ -70,7 +74,7 @@ public class PostService {
             postRepository.save(post.get());
             return post.get();
         } else {
-            //zmienic to sprawdzic chyba spoko jest!!!!!!!!!!!!!!!!!!!!!!!!
+            //todo zmienic to sprawdzic chyba spoko jest!!!!!!!!!!!!!!!!!!!!!!!!
             throw new NoSuchElementException(String.format("There is no post with ID No.%s", idPost));
         }
     }

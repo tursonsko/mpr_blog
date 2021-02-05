@@ -19,14 +19,15 @@ public class PostController {
         this.postService = postService;
     }
 
+    //sprawdzic
     @GetMapping
-    public ResponseEntity<List<Post>> findAll() {
-        return ResponseEntity.ok(postService.findAll());
+    public ResponseEntity<List<Post>> findAllPosts() {
+        return ResponseEntity.ok(postService.findAllPosts());
     }
 
     @GetMapping("/{idPost}")
-    public ResponseEntity<Optional<Post>> findById(@PathVariable Long idPost) {
-        Optional<Post> byIdPost = postService.findById(idPost);
+    public ResponseEntity<Optional<Post>> findPostById(@PathVariable Long idPost) {
+        Optional<Post> byIdPost = postService.findPostById(idPost);
         if (byIdPost.isPresent()) {
             return ResponseEntity.ok(byIdPost);
         } else {
@@ -35,19 +36,19 @@ public class PostController {
     }
 
     @PostMapping("/{idAuthor}")
-    public ResponseEntity<Post> save(@RequestBody Post post, @PathVariable Long idAuthor) {
-        return ResponseEntity.ok(postService.save(post, idAuthor));
+    public ResponseEntity<Post> saveSinglePost(@RequestBody Post post, @PathVariable Long idAuthor) {
+        return ResponseEntity.ok(postService.saveSinglePost(post, idAuthor));
     }
 
     @DeleteMapping("/{idPost}")
-    public ResponseEntity<Void> delete(@PathVariable Long idPost) {
-        postService.delete(idPost);
+    public ResponseEntity<Void> deleteSinglePostById(@PathVariable Long idPost) {
+        postService.deleteSinglePostById(idPost);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{idPost}")
-    public ResponseEntity<Post> update(@RequestBody Post post, @PathVariable Long idPost) {
-        return ResponseEntity.ok(postService.update(idPost, post));
+    public ResponseEntity<Post> updateBodyPost(@RequestBody Post post, @PathVariable Long idPost) {
+        return ResponseEntity.ok(postService.updateBodyPost(idPost, post));
     }
 
     @GetMapping("/{idAuthor}/{categoryPost}")
@@ -57,7 +58,7 @@ public class PostController {
     }
 
     @GetMapping("/filter/{pattern}")
-    public ResponseEntity<List<Post>> phraseFromBodyPost(@PathVariable String pattern) {
+    public ResponseEntity<List<Post>> findSpecificPost(@PathVariable String pattern) {
         return ResponseEntity.ok(postService.findSpecificPost(pattern));
     }
 }

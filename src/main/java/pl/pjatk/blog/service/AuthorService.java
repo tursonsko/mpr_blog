@@ -16,8 +16,9 @@ public class AuthorService {
     public AuthorService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-
+//tested
     public List<Author> findAll() {
+        authorRepository.count();
         List<Author> authorList = authorRepository.findAll();
         if (authorList.size() > 0) {
             return authorRepository.findAll();
@@ -26,7 +27,6 @@ public class AuthorService {
         }
     }
 
-    //todo finbyid
     public Optional<Author> findById(Long idAuthor) {
         return authorRepository.findById(idAuthor);
     }

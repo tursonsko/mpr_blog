@@ -30,13 +30,12 @@ public class AuthorController {
     @GetMapping("/{idAuthor}")
     public ResponseEntity<Optional<Author>> findById(@PathVariable Long idAuthor) {
         Optional<Author> optionalAuthor = authorService.findById(idAuthor);
-        if(optionalAuthor.isPresent()) {
+        if (optionalAuthor.isPresent()) {
             return ResponseEntity.ok(optionalAuthor);
         } else {
             throw new NoSuchElementException(String.format("There is no Author with ID No. %s", idAuthor));
         }
     }
-
 
     @PostMapping
     public ResponseEntity<Author> save(@Valid @RequestBody Author newAuthor) throws Exception {

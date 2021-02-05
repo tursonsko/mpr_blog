@@ -46,4 +46,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleEmailExistsException(EmailExistsException exception) {
         return new ResponseEntity<>(exception.toString(), HttpStatus.NOT_ACCEPTABLE);
     }
+
+    //    NumberFormatException
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Object> NumberFormatException(NumberFormatException exception) {
+        return new ResponseEntity<>(exception.toString() + " Provided data of ID is not a Number! Please provide correct!", HttpStatus.BAD_REQUEST);
+    }
 }
