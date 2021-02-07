@@ -2,6 +2,7 @@ package pl.pjatk.blog.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import pl.pjatk.blog.model.AuthorWithCategory;
 import pl.pjatk.blog.model.Post;
 import pl.pjatk.blog.service.PostService;
@@ -19,7 +20,6 @@ public class PostController {
         this.postService = postService;
     }
 
-    //sprawdzic
     @GetMapping
     public ResponseEntity<List<Post>> findAllPosts() {
         return ResponseEntity.ok(postService.findAllPosts());

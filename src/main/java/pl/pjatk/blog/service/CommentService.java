@@ -2,11 +2,10 @@ package pl.pjatk.blog.service;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
 import pl.pjatk.blog.customExceptions.CountMaxCommentsException;
-import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.model.Comment;
 import pl.pjatk.blog.model.Post;
-import pl.pjatk.blog.repository.AuthorRepository;
 import pl.pjatk.blog.repository.CommentRepository;
 import pl.pjatk.blog.repository.PostRepository;
 
@@ -51,7 +50,6 @@ public class CommentService {
             throw new NoSuchElementException(String.format("There is no Comment with ID No.%s", idComment));
         }
     }
-
 
     public Comment saveSingleComment(Comment comment, Long idPost) throws CountMaxCommentsException {
         Optional<Post> optionalPost = postRepository.findById(idPost);

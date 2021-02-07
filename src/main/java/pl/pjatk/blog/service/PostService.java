@@ -54,7 +54,8 @@ public class PostService {
             postRepository.deleteById(idPost);
         }
     }
-//    NumberFormatException tu dziala
+
+    //NumberFormatException works here
     public AuthorWithCategory getPostByAuthorPostAndCategoryPost(Long idAuthor, String categoryPost) {
         Optional<Author> optionalAuthor = authorRepository.findById(idAuthor);
         if (optionalAuthor.isPresent()) {
@@ -74,7 +75,6 @@ public class PostService {
             postRepository.save(post.get());
             return post.get();
         } else {
-            //todo zmienic to sprawdzic chyba spoko jest!!!!!!!!!!!!!!!!!!!!!!!!
             throw new NoSuchElementException(String.format("There is no post with ID No.%s", idPost));
         }
     }

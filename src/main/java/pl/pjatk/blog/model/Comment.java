@@ -12,16 +12,11 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idComment;
-
-
     private String authorComment;
-
     private String bodyComment;
-
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date timeComment;
-
     @ManyToOne
     @JoinColumn(name = "id_post")
     private Post post;

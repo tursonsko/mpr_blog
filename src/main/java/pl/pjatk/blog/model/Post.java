@@ -1,15 +1,11 @@
 package pl.pjatk.blog.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.sun.istack.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-//import java.sql.Date;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +16,6 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPost;
-
     @ManyToOne
     @JoinColumn(name = "id_author")
     private Author authorPost;
@@ -29,8 +24,7 @@ public class Post {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date timePost;
-
-    @OneToMany(cascade= CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
     private List<Comment> commentsList = new ArrayList<>();
 
     public Post() {
@@ -59,7 +53,6 @@ public class Post {
     public void setAuthorPost(Author authorPost) {
         this.authorPost = authorPost;
     }
-
 
     public String getBodyPost() {
         return bodyPost;

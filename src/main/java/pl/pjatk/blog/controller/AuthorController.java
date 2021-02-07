@@ -1,8 +1,6 @@
 package pl.pjatk.blog.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.service.AuthorService;

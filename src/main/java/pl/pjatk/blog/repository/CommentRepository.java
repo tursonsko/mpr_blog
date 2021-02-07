@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.pjatk.blog.model.Comment;
 
-
 import java.util.Date;
+
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 

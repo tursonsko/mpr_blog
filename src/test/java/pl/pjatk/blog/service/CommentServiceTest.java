@@ -38,7 +38,8 @@ public class CommentServiceTest {
 
     @Mock
     private Date date;
-//nie dziala
+
+    //DOES NOT WORK
     @Test
     public void shouldSaveSingleComment() throws CountMaxCommentsException {
         Date date = new Date();
@@ -51,10 +52,4 @@ public class CommentServiceTest {
         Comment commentRetrieved = commentService.saveSingleComment(comment, comment.getIdComment());
         assertThat(commentRetrieved).isNotNull();
     }
-
-    @Test
-    public void testFindAllIsEmpty() {
-        assertThrows(NoSuchElementException.class, () -> commentService.findAllComments());
-    }
-
 }

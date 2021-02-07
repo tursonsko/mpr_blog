@@ -1,7 +1,7 @@
 package pl.pjatk.blog.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+
 import pl.pjatk.blog.customExceptions.EmailExistsException;
 import pl.pjatk.blog.model.Author;
 import pl.pjatk.blog.repository.AuthorRepository;
@@ -16,7 +16,7 @@ public class AuthorService {
     public AuthorService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-//tested
+
     public List<Author> findAll() {
         authorRepository.count();
         List<Author> authorList = authorRepository.findAll();

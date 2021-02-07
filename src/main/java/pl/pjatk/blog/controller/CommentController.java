@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import pl.pjatk.blog.customExceptions.CountMaxCommentsException;
 import pl.pjatk.blog.model.Comment;
-import pl.pjatk.blog.model.Post;
 import pl.pjatk.blog.service.CommentService;
 
 import java.util.List;
@@ -25,7 +24,6 @@ public class CommentController {
         return ResponseEntity.ok(commentService.findAllComments());
     }
 
-    //todo sprawdzic
     @GetMapping("/{idComment}")
     public ResponseEntity<Optional<Comment>> findCommentById(@PathVariable Long idComment) {
         Optional<Comment> byIdComment = commentService.findCommentById(idComment);
@@ -36,14 +34,12 @@ public class CommentController {
         }
     }
 
-    //todo sprawdzic
     @DeleteMapping("/{idComment}")
     public ResponseEntity<Void> deleteSingleCommentById(@PathVariable Long idComment) {
         commentService.deleteSingleCommentById(idComment);
         return ResponseEntity.ok().build();
     }
 
-    //TODO update
     @PutMapping("/{idComment}")
     public ResponseEntity<Comment> updateBodyComment(@RequestBody Comment comment, @PathVariable Long idComment) {
         return ResponseEntity.ok(commentService.updateBodyComment(idComment, comment));

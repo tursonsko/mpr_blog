@@ -22,7 +22,6 @@ import java.util.Optional;
 @ExtendWith(MockitoExtension.class)
 public class AuthorServiceTest {
 
-    //to co testuje zawsze z ta anotacja, ma sie zachowywac normalnie
     @InjectMocks
     private AuthorService authorService;
 
@@ -40,7 +39,6 @@ public class AuthorServiceTest {
     @Test
     public void testFindAllIsNotEmpty() {
         //given
-        //author is given
 
         //when
         when(authorRepository.findAll()).thenReturn(List.of(author));

@@ -1,6 +1,5 @@
 package pl.pjatk.blog.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
@@ -16,13 +15,10 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAuthor;
     private String nameAuthor;
-
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")
     private String emailAuthor;
-
     @OneToMany(cascade= CascadeType.ALL, mappedBy = "authorPost", fetch = FetchType.LAZY)
     private List<Post> postsList = new ArrayList<>();
-
 
     public Author() {
 
@@ -33,8 +29,6 @@ public class Author {
         this.emailAuthor = emailAuthor;
         this.postsList = postsList;
     }
-
-
 
     public Long getIdAuthor() {
         return idAuthor;
