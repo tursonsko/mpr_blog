@@ -56,15 +56,11 @@ public class CommentService {
         if (optionalPost.isEmpty()) {
             throw new DataIntegrityViolationException(String.format("Cannot add comment becasue there is no Post with Id No. %s", idPost));
         } else {
-
             Calendar c = Calendar.getInstance();
             c.setTime(comment.getTimeComment());
             c.add(Calendar.SECOND, -15);/*zmienic na minute*/
-
             Date currentDateMinusOne = c.getTime();
-
             Long count = commentRepository.getCommentsYoungerThanOneMinute(currentDateMinusOne);
-
             if (count < 5) {
                 return commentRepository.save(comment);
             } else {
